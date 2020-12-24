@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace GutsanIndividWork
+{
+    public class Car
+    {
+
+        public Car(string releaseYear, string price, string speed)
+        {
+            this.releaseYear = releaseYear;
+            this.price = price;
+            this.speed = speed;
+
+        }
+        
+       
+        public string releaseYear;
+        public string price;
+        public string speed;
+        public Guid CodeName = Guid.NewGuid();
+
+
+        public void show()
+        {
+            Console.WriteLine($"CodeName {CodeName}");
+        }
+    }
+
+    public class Cars
+    {
+        public string[] colors = new[] {"red", "green", "blue"};
+         public List<Car> _cars = new List<Car>();
+
+         public Cars()
+         {
+             _cars.Add(new Car(2002.ToString(),1999.ToString(),123.ToString()));
+             _cars.Add(new Car(2003.ToString(),1998.ToString(),124.ToString()));
+             _cars.Add(new Car(2004.ToString(),1997.ToString(),125.ToString()));
+             _cars.Add(new Car(2005.ToString(),1996.ToString(),126.ToString()));
+             _cars.Add(new Car(2006.ToString(),1995.ToString(),127.ToString()));
+         }
+
+
+         bool colorExist(string color)
+         {
+             var c =colors.FirstOrDefault(x => x == color);
+             if (c != null)
+             {
+                 return true;
+             }
+             else
+             {
+                 return false;
+             }
+             
+         }
+
+         public void CarPick()
+         {
+             Console.WriteLine("enter year");
+             string b = Console.ReadLine();
+             Console.WriteLine("enter price");
+             string t = Console.ReadLine();
+             Console.WriteLine("enter speed");
+             string z = Console.ReadLine();
+             Console.WriteLine("enter color");
+             string color = Console.ReadLine();
+
+             bool colex = colorExist(color);
+             
+             Car car = _cars.FirstOrDefault(x => x.price == t && x.speed == z && x.releaseYear == b);
+
+             if (car != null && colex == true)
+             {
+                 car.show();
+             }
+             else
+             {
+                 Console.WriteLine("Not Found");
+             }
+         }
+         
+         
+    }
+    
+    class Program
+    {
+      
+       
+        static void Main(string[] args)
+        {
+              Cars cars =new Cars();
+              cars.CarPick();
+
+           
+
+
+        }
+    }
+}
